@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#102a43">
+<title>TrustCheck Jobs — Vérifier avant de postuler</title>
+<style>
+:root{--navy:#102a43;--blue:#176b87;--teal:#d9f3ee;--bg:#f3f7fa;--ink:#172b3a;--muted:#607586;--line:#dce6ec;--red:#a52c35;--amber:#8a5a00;--green:#176b49}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(135deg,#102a43,#176b87);color:white;padding:24px 18px 28px;border-radius:0 0 24px 24px}
+.wrap{max-width:760px;margin:auto}.brand{font-size:13px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;opacity:.85}.hero h1{font-size:clamp(27px,6vw,38px);line-height:1.1;margin:12px 0}.hero p{margin:0;color:#e4f2f7}.pill{display:inline-block;margin-top:14px;background:#ffffff20;border:1px solid #ffffff4a;border-radius:99px;padding:5px 10px;font-size:12px}
+main{padding:18px 14px 40px}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:18px;margin:0 0 14px;box-shadow:0 5px 18px #102a4308}.step{font-size:12px;font-weight:800;letter-spacing:.8px;color:var(--blue);text-transform:uppercase}h2{font-size:20px;margin:5px 0 10px}p{margin:8px 0}.hint{color:var(--muted);font-size:13px}label{display:block;font-weight:700;margin:12px 0 6px}textarea,input,select{width:100%;font:inherit;border:1px solid #c8d6df;border-radius:12px;padding:12px;background:#fff;color:var(--ink)}textarea{min-height:190px;resize:vertical}input:focus,textarea:focus,select:focus{outline:3px solid #176b8728;border-color:var(--blue)}button{font:inherit;font-weight:750;border:0;border-radius:12px;padding:13px 16px;cursor:pointer}button:focus{outline:3px solid #176b8744}.primary{background:var(--navy);color:#fff;width:100%;margin-top:14px}.secondary{background:#e9f2f6;color:var(--navy)}.smallbtn{font-size:13px;padding:9px 11px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.result{display:none}.risk-head{display:flex;align-items:center;gap:12px}.score{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;font-size:23px;font-weight:850;flex-shrink:0;border:4px solid currentColor}.risk-low{color:var(--green);background:#e6f7ef}.risk-medium{color:var(--amber);background:#fff3d5}.risk-high{color:var(--red);background:#ffeaeb}.risk-title{font-size:21px;font-weight:850}.meter{height:9px;border-radius:99px;background:#e9eef2;overflow:hidden;margin:14px 0}.meter span{display:block;height:100%;width:0;background:var(--blue);transition:width .25s}.flag{border-left:4px solid var(--amber);padding:10px 12px;background:#fff9eb;border-radius:0 10px 10px 0;margin:9px 0}.flag.strong{border-color:var(--red);background:#fff0f0}.flag.good{border-color:var(--green);background:#eefaf4}.flag b{display:block}.section-title{font-size:16px;margin:18px 0 7px}.checklist{padding-left:22px}.checklist li{margin:9px 0}.notice{background:#eef5f8;border-radius:12px;padding:12px;font-size:13px;color:#3d596a}.footer{font-size:12px;color:var(--muted);text-align:center;padding:10px 8px}.hidden{display:none!important}.tag{font-size:12px;border-radius:99px;padding:3px 8px;background:#eaf1f5;display:inline-block;margin:3px 3px 0 0}
+@media(min-width:620px){main{padding:24px 18px 48px}.card{padding:22px}.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.two .card{margin-bottom:14px}}
+</style>
+</head>
+<body>
+<header><div class="wrap hero">
+  <div class="brand">TrustCheck Jobs</div>
+  <h1>Vérifie l’offre.<br>Protège ton avenir.</h1>
+  <p>Repère les signaux de risque dans une offre d’emploi et découvre comment la vérifier avant d’envoyer de l’argent ou des documents.</p>
+  <span class="pill">V1 gratuite · Analyse locale · Aucun compte requis</span>
+</div></header>
+<main class="wrap">
+  <section class="card">
+    <div class="step">Étape 1</div><h2>Colle le texte de l’offre</h2>
+    <p class="hint">Tu peux copier une annonce reçue sur WhatsApp, Facebook, Telegram ou un site d’emploi. N’ajoute pas de mot de passe, code OTP, numéro de pièce ou donnée bancaire.</p>
+    <label for="offer">Texte de l’annonce *</label>
+    <textarea id="offer" maxlength="12000" placeholder="Ex. : Une entreprise recrute 20 agents. Salaire 800 $/mois. Envoyez 25 $ de frais de dossier sur Mobile Money pour confirmer votre place..."></textarea>
+    <div class="hint" id="count">0 / 12 000 caractères</div>
+    <div class="two">
+      <div><label for="source">Où as-tu reçu l’offre ?</label><select id="source"><option>WhatsApp</option><option>Facebook</option><option>Telegram</option><option>Site d’emploi</option><option>Email</option><option>Autre / inconnu</option></select></div>
+      <div><label for="country">Pays concerné (facultatif)</label><input id="country" placeholder="Ex. : RDC, France, Sénégal"></div>
+    </div>
+    <button class="primary" id="analyze">Analyser les signaux de risque</button>
+    <div class="actions"><button class="secondary smallbtn" id="example">Tester avec un exemple fictif</button><button class="secondary smallbtn" id="clear">Effacer</button></div>
+  </section>
+
+  <section class="card result" id="result" aria-live="polite">
+    <div class="step">Résultat de l’analyse</div>
+    <div class="risk-head"><div class="score" id="score">0</div><div><div class="risk-title" id="riskTitle">À vérifier</div><div class="hint" id="riskSub"></div></div></div>
+    <div class="meter"><span id="meter"></span></div>
+    <p class="hint">Indice heuristique fondé uniquement sur les mots et signaux présents dans le texte fourni. Ce n’est ni une probabilité statistique, ni une preuve de fraude.</p>
+    <h3 class="section-title">Signaux détectés</h3><div id="flags"></div>
+    <h3 class="section-title">Ce que nous ne savons pas encore</h3><div id="unknowns"></div>
+    <h3 class="section-title">Procédure de vérification recommandée</h3><ol class="checklist" id="steps"></ol>
+    <div class="notice"><b>Règle de sécurité :</b> ne paie pas pour “débloquer” un emploi et ne partage jamais ton mot de passe, ton code de validation ou ton code PIN. En cas de doute, suspends la démarche et contacte l’organisation par un canal trouvé indépendamment.</div>
+    <div class="actions"><button class="secondary" id="copy">Copier le rapport</button><button class="secondary" id="reanalyze">Modifier l’offre</button></div>
+    <p class="hint" id="copyStatus" role="status"></p>
+  </section>
+
+  <section class="card">
+    <div class="step">Limites honnêtes</div><h2>Ce que cette V1 peut — et ne peut pas — faire</h2>
+    <p><b>Elle peut :</b> repérer des formulations risquées, expliquer pourquoi elles méritent une vérification et proposer des étapes prudentes.</p>
+    <p><b>Elle ne peut pas encore :</b> confirmer l’existence d’une entreprise en temps réel, vérifier automatiquement un domaine web, consulter des bases de signalements ou garantir qu’une annonce est légitime.</p>
+    <p class="hint">La version actuelle analyse le texte directement sur ton appareil. Elle n’envoie pas l’annonce à un serveur et ne nécessite pas de clé API.</p>
+  </section>
+  <div class="footer">TrustCheck Jobs V1 · Outil d’aide à la décision, pas une certification ni un avis juridique.</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const textarea=$('offer');
+textarea.addEventListener('input',()=>$('count').textContent=textarea.value.length.toLocaleString('fr-FR')+' / 12 000 caractères');
+$('example').addEventListener('click',()=>{textarea.value="URGENT ! Grande ONG internationale recrute 30 agents en RDC. Salaire garanti de 1 500 $ par mois, aucune expérience exigée. Pour réserver votre place, envoyez aujourd’hui 35 $ de frais de dossier par Mobile Money au numéro du recruteur. Envoyez aussi votre carte d’identité et le code reçu par SMS. Répondez dans les 30 minutes, les places sont presque finies. Les détails de l’organisation seront communiqués après paiement.";textarea.dispatchEvent(new Event('input'));});
+$('clear').addEventListener('click',()=>{textarea.value='';textarea.dispatchEvent(new Event('input'));$('result').style.display='none';$('copyStatus').textContent='';});
+const rules=[
+ {id:'fee',weight:34,strong:true,rx:/(frais?\s+(de\s+)?(dossier|inscription|recrutement|formation|activation|traitement)|payer\s+(pour|afin de)\s+(obtenir|confirmer|réserver|débloquer)|versement\s+obligatoire|garantie\s+financière|débloquer\s+(votre\s+)?(emploi|salaire|poste)|frais?\s+avant\s+(embauche|recrutement|prise de poste))/i,title:'Paiement demandé pour obtenir le poste',desc:'Un employeur légitime ne devrait normalement pas demander au candidat de payer pour garantir son embauche. Ne verse rien avant vérification indépendante.'},
+ {id:'secret',weight:40,strong:true,rx:/(code\s+(otp|pin|secret|de validation)|mot de passe|code reçu par sms|identifiants?\s+(bancaires?|de connexion)|code mobile money)/i,title:'Demande de code secret ou d’identifiants',desc:'Ne partage jamais un code de validation, un PIN ou un mot de passe. Une telle demande peut permettre de prendre le contrôle d’un compte.'},
+ {id:'id',weight:15,strong:false,rx:/(carte d’identité|passeport|pièce d’identité|numéro de compte|coordonnées bancaires|photo de votre pièce|document d’identité)/i,title:'Demande de documents personnels',desc:'Les documents peuvent être nécessaires à certaines étapes légitimes, mais vérifie d’abord l’employeur et le stade du recrutement. Masque les données non nécessaires.'},
+ {id:'urgency',weight:12,strong:false,rx:/(urgent|dans les \d+\s*(minutes?|heures?)|aujourd’hui seulement|dernières? places|répondez immédiatement|avant minuit|offre limitée)/i,title:'Pression ou urgence inhabituelle',desc:'La pression temporelle peut empêcher de vérifier les informations. Un vrai processus de recrutement doit permettre des questions raisonnables.'},
+ {id:'salary',weight:12,strong:false,rx:/(salaire (garanti|de|:)?\s*\$?\s*\d{3,}|gagnez?\s+\$?\s*\d{3,}\s*(par jour|\/jour|par semaine)|aucune expérience.{0,60}(salaire|revenu)|revenu garanti)/i,title:'Promesse de revenu très élevé ou garanti',desc:'Le salaire seul ne prouve rien. Compare le montant au poste, au pays, aux responsabilités et aux offres publiées par des sources fiables.'},
+ {id:'noexp',weight:7,strong:false,rx:/(aucune expérience (exigée|requise)|sans diplôme.{0,40}(salaire|revenu)|tout le monde est accepté)/i,title:'Conditions exceptionnellement faciles',desc:'Des postes débutants existent, mais une combinaison de salaire élevé, absence de critères et recrutement immédiat mérite des vérifications.'},
+ {id:'personal',weight:18,strong:false,rx:/(envoyez (l['’])?argent|mobile money|m-pesa|orange money|airtel money|western union|crypto(monnaie)?|wallet)/i,title:'Transfert d’argent ou paiement par canal difficile à contester',desc:'Vérifie pourquoi un paiement serait nécessaire et qui reçoit les fonds. Ne transfère rien pour sécuriser un poste.'},
+ {id:'offplatform',weight:8,strong:false,rx:/(contactez-moi uniquement sur whatsapp|aucun appel|ne contactez pas l’entreprise|garder confidentiel|pas besoin de vérifier)/i,title:'Communication difficile à vérifier ou demande de secret',desc:'Cherche un contact officiel indépendant. Le numéro ou le lien envoyé par le recruteur ne suffit pas à confirmer son identité.'},
+ {id:'recruit',weight:15,strong:false,rx:/(recrutement garanti|embauche garantie|poste assuré|vous êtes déjà sélectionné|sélectionné sans entretien)/i,title:'Embauche promise sans processus clair',desc:'Demande les étapes du recrutement et vérifie le poste sur le site officiel de l’organisation.'},
+ {id:'moneytransfer',weight:30,strong:true,rx:/(recevoir de l’argent.{0,80}(transférer|renvoyer)|transférer.{0,80}(fonds|argent).{0,80}(commission|votre compte)|utiliser votre compte bancaire|faire transiter|réexpédier des colis)/i,title:'Risque de transfert d’argent ou de colis pour un tiers',desc:'Ne fais pas transiter des fonds ni des colis pour une personne inconnue : tu pourrais être impliqué dans une fraude ou une activité illégale.'},
+ {id:'vague',weight:6,strong:false,rx:/(grande entreprise internationale|société de renommée mondiale|détails après paiement|nom de l’entreprise non communiqué)/i,title:'Employeur ou poste insuffisamment identifié',desc:'Le nom légal, le site officiel, la description du poste et une adresse professionnelle vérifiable devraient être fournis.'}
+];
+let lastReport='';
+function analyze(){
+ const text=textarea.value.trim();if(text.length<25){alert('Colle une offre un peu plus complète (au moins 25 caractères) pour lancer l’analyse.');textarea.focus();return;}
+ let matched=[],score=0;for(const r of rules){if(r.rx.test(text)){matched.push(r);score+=r.weight;}}
+ score=Math.min(100,score);
+ let level,title,sub,cls;
+ if(matched.some(x=>x.id==='secret'||x.id==='fee'||x.id==='moneytransfer')||score>=45){level='high';title='Risque élevé à traiter avec prudence';sub='Plusieurs signaux importants sont présents. Suspends toute démarche risquée jusqu’à vérification.';cls='risk-high';}
+ else if(score>=18){level='medium';title='Plusieurs points à vérifier';sub='Des signaux de risque sont présents, mais ils ne prouvent pas à eux seuls une fraude.';cls='risk-medium';}
+ else{level='low';title='Peu de signaux détectés dans le texte';sub='Cela ne confirme pas que l’offre est authentique : des éléments importants peuvent manquer.';cls='risk-low';}
+ $('score').textContent=score;$('score').className='score '+cls;$('riskTitle').textContent=title;$('riskSub').textContent=sub;$('meter').style.width=score+'%';$('meter').style.background=level==='high'?'#a52c35':level==='medium'?'#d49a25':'#21835c';
+ $('flags').innerHTML='';
+ if(!matched.length){$('flags').innerHTML='<div class="flag good"><b>Aucun signal connu détecté</b>Le texte fourni ne contient pas les formulations que cette version sait repérer. Une annonce peut néanmoins être frauduleuse sans les utiliser.</div>';}
+ matched.forEach(r=>{let d=document.createElement('div');d.className='flag '+(r.strong?'strong':'');d.innerHTML='<b></b><span></span>';d.querySelector('b').textContent=r.title;d.querySelector('span').textContent=r.desc;$('flags').appendChild(d);});
+ const unknown=[
+  'Le nom légal et l’existence de l’employeur n’ont pas été vérifiés indépendamment.',
+  'L’adresse e-mail, le domaine du site et le numéro du recruteur ne sont pas authentifiés par cette version.',
+  'Le salaire, le poste vacant et le processus de recrutement ne sont pas confirmés par une source officielle.'
+ ];
+ $('unknowns').innerHTML='<ul>'+unknown.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+ const steps=[
+  'Recherche le nom exact de l’organisation sur le web et ouvre toi-même son site officiel, sans te fier uniquement au lien reçu.',
+  'Vérifie si le même poste apparaît sur la page carrières officielle ou sur un canal de recrutement reconnu.',
+  'Contacte l’organisation via un numéro ou une adresse trouvés indépendamment, puis demande confirmation du poste et du nom du recruteur.',
+  'Compare l’adresse e-mail du recruteur au domaine officiel. Méfie-toi des fautes, des domaines proches et des comptes gratuits prétendant représenter une grande organisation.',
+  'Ne paie pas de frais pour réserver le poste. Ne partage jamais de mot de passe, PIN ou code reçu par SMS.',
+  'Si l’on demande un transfert d’argent, de crypto ou de colis pour un tiers, refuse. Garde les preuves et signale l’annonce à la plateforme concernée.'
+ ];
+ $('steps').innerHTML=steps.map(x=>'<li>'+x+'</li>').join('');
+ lastReport='TRUSTCHECK JOBS — RAPPORT V1\\nIndice heuristique : '+score+'/100\\nÉvaluation : '+title+'\\n\\nSignaux détectés :\\n'+(matched.length?matched.map(r=>'- '+r.title+': '+r.desc).join('\\n'):'- Aucun signal connu détecté dans le texte.')+'\\n\\nIncertitudes :\\n- Employeur non vérifié indépendamment.\\n- Coordonnées et domaine non authentifiés.\\n- Poste et salaire non confirmés.\\n\\nÉtapes :\\n'+steps.map((x,i)=>(i+1)+'. '+x).join('\\n')+'\\n\\nLimite : ce score n’est ni une probabilité statistique ni une preuve de fraude.';
+ $('result').style.display='block';$('copyStatus').textContent='';$('result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('analyze').addEventListener('click',analyze);$('reanalyze').addEventListener('click',()=>{textarea.focus();window.scrollTo({top:0,behavior:'smooth'});});
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(lastReport);$('copyStatus').textContent='Rapport copié.';}catch(e){const ta=document.createElement('textarea');ta.value=lastReport;document.body.appendChild(ta);ta.select();const ok=document.execCommand('copy');ta.remove();$('copyStatus').textContent=ok?'Rapport copié.':'Copie automatique indisponible : sélectionne le rapport ou réessaie dans Chrome.';}});
+</script>
+</body></html>
